@@ -37,8 +37,8 @@ We made use of:
 
 To run our app:
 
-1. Clone the repository.
-2. Open the project in Unity.
-3. Build and deploy to your mobile device.
+1. Open the Demo Link with your phone: [https://sanctum-xr-colosseum-submission.vercel.app/]
+2. Accept camera permissions to enable immersive content
+3. Be sure to click the object ahead to interact.
 
 Our code is licensed under the MIT License. Pull requests will be accepted to this repo, pending review and approval.
