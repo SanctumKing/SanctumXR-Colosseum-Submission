@@ -1,0 +1,252 @@
+<script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
+<script src="https://unpkg.com/aframe-event-set-component@3.0.3/dist/aframe-event-set-component.min.js"></script>
+<script src="https://cdn.rawgit.com/donmccurdy/aframe-extras/v6.1.1/dist/aframe-extras.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/aframe-event-set-component@3.0.3/dist/aframe-event-set-component.min.js"></script>
+
+<script src="app.js" type="module"></script>
+<body>
+  <script>
+    function showInfoCard() {
+      const infoCard = document.getElementById("infoCard");
+      if (infoCard) {
+        infoCard.setAttribute("visible", "true");
+      } else {
+        infoCard.setAttribute("visible", "false");
+      }
+    }
+    function hideInfoCard() {
+      const infoCard = document.getElementById("infoCard");
+      const mintButton = document.getElementById("mintButton");
+      if (infoCard) {
+        infoCard.setAttribute("visible", "false");
+      }
+    }
+  </script>
+  <script>
+    function redirect() {
+      window.location.href =
+        "https://staging.crossmint.com/console/collections/default-solana/created/nfts";
+    }
+  </script>
+
+  <a-scene
+    responsive-immersive
+    landing-page="mediaSrc: #landing-page-video;"
+    xrextras-loading
+    xrextras-runtime-error
+    renderer="colorManagement: true;"
+    xrweb="allowedDevices: any; disableDefaultEnvironment: true;"
+  >
+    <xrextras-resource
+      id="landing-page-video"
+      src="./Assets/moon-portal.mp4"
+    ></xrextras-resource>
+
+    <!-- We can define assets here to be loaded while the load screen is displayed -->
+    <a-assets>
+      <!-- models -->
+      <a-asset-item
+        id="portal-rim-model"
+        src="./Assets/portal.glb"
+      ></a-asset-item>
+      <a-asset-item
+        id="moon-model"
+        src="./Assets/moon-ground.glb"
+      ></a-asset-item>
+      <a-asset-item
+        id="platform-model"
+        src="./Assets/platform.glb"
+      ></a-asset-item>
+      <a-asset-item id="flag-model" src="./Assets/entei.glb"></a-asset-item>
+      <a-asset-item id="rocks-model" src="./Assets/rocks.glb"></a-asset-item>
+      <!-- textures -->
+      <img id="skybox-img" src="./Assets/skybox-2.jpg" />
+      <img id="blob-shadow-img" src="./Assets/blob-shadow.png" />
+      <img id="satellite-img" src="./Assets/solaris_man.png" />
+      <video
+        id="portal-video"
+        muted
+        autoplay
+        playsinline
+        crossorigin="anonymous"
+        loop="true"
+        src="./Assets/portal_3.mp4"
+      ></video>
+    </a-assets>
+
+    <!-- Camera -->
+    <!-- <a-camera id="camera" position="0 9 11"> </a-camera> -->
+
+    <!-- Hider walls -->
+    <xrextras-opaque-background remove="true">
+      <a-entity id="hider-walls">
+        <a-box
+          scale="100 1 100"
+          position="0 -1 49"
+          xrextras-hider-material
+        ></a-box>
+        <a-box
+          scale="100 100 1"
+          position="0 50 75"
+          xrextras-hider-material
+        ></a-box>
+        <a-box
+          scale="100 1 100"
+          position="0 100 49"
+          xrextras-hider-material
+        ></a-box>
+        <a-box
+          scale="1 100 100"
+          position="-30 50 50"
+          xrextras-hider-material
+        ></a-box>
+        <a-box
+          scale="1 100 100"
+          position="30 50 50"
+          xrextras-hider-material
+        ></a-box>
+        <a-ring
+          id="portalHiderRing"
+          radius-inner="0.001"
+          radius-outer="100"
+          position="0 7.5 -0.2"
+          xrextras-hider-material
+        ></a-ring>
+      </a-entity>
+
+      <a-entity id="portal-wall">
+        <a-circle
+          radius="5.2"
+          rotation="0 180 0"
+          position="0 7.5 0"
+          scale="1 1 1"
+          xrextras-hider-material
+        ></a-circle>
+        <a-circle
+          radius="5.2"
+          rotation="0 180 0"
+          position="0 7.5 0.25"
+          scale="1 1 1"
+          xrextras-hider-material
+        ></a-circle>
+      </a-entity>
+    </xrextras-opaque-background>
+
+    <!-- Lights -->
+    <a-entity
+      light="
+      type: directional;
+      castShadow: true;
+      shadowMapHeight:2048;
+      shadowMapWidth:2048;
+      shadowCameraTop: 35;
+      shadowCameraBottom: -20;
+      shadowCameraRight: 40;
+      shadowCameraLeft: -10;
+      target: #portalRim"
+      xrextras-attach="target: portalRim; offset: 18 7 14"
+      shadow
+    >
+    </a-entity>
+
+    <a-light type="ambient" intensity="0.7"></a-light>
+
+    <!-- Portal Contents -->
+    <a-entity id="portal-contents">
+      <a-entity
+        gltf-model="#moon-model"
+        rotation="0 90 0"
+        position="8 -0.5 -5"
+        scale="0.5 0.5 0.5"
+        shadow="cast: false"
+      >
+      </a-entity>
+
+      <a-entity
+        gltf-model="#platform-model"
+        rotation="0 -90 0"
+        reflections="type: static"
+        position="-0.4 0 -10"
+        scale="9 9 9"
+        shadow="receive: false"
+      >
+      </a-entity>
+
+      <a-plane
+        material="src: #satellite-img; transparent: true; roughness: 0.8; metalness: 0"
+        rotation="0 30 0"
+        position="-30 20 -50"
+        scale="40 40 40"
+        shadow="receive: false"
+      >
+      </a-plane>
+
+      <a-entity
+        gltf-model="#flag-model"
+        rotation="0 0 0"
+        reflections="type: static"
+        position="3 0 -43"
+        scale="5 5 5"
+        shadow="receive: false"
+        cursor-listener
+        onclick="showInfoCard()"
+      >
+      </a-entity>
+
+      <a-entity
+        gltf-model="#rocks-model"
+        reflections="type: static"
+        position="-14 -1 -42"
+        scale="0.75 0.25 0.75"
+        shadow="receive: true"
+      >
+        <a-plane
+          id="infoCard"
+          position="30 55 35"
+          rotation="0 1 0"
+          width="5"
+          height="17"
+          material="src:./Assets/Entei_info.png; metalness: 0.3; opacity: 0.9999;"
+          visible="false"
+          scale="3 3 3"
+          cursor-listener
+          onclick="redirect()"
+        ></a-plane>
+      </a-entity>
+    </a-entity>
+
+    <a-sky src="#skybox-img" rotation="0 7 0"></a-sky>
+    <a-entity
+      id="portalRim"
+      gltf-model="#portal-rim-model"
+      spin="axis: x; speed: 14000"
+      reflections="type: realtime"
+      position="0 7.5 0"
+      rotation="90 -90 -90"
+      scale="0.001 0.001 0.001"
+      shadow="receive: false"
+    >
+    </a-entity>
+    <a-entity
+      id="portalVideo"
+      auto-play-video="video: #portal-video"
+      material="shader: chromakey; src: #portal-video; color: 0 0 0; blending: additive; side: front"
+      geometry="primitive: plane; height: 1; width: 1;"
+      position="0 7.5 0.1"
+      scale="0.001 0.001 0.001"
+    >
+    </a-entity>
+    <a-circle
+      id="portalShadow"
+      radius="0.5"
+      material="src: #blob-shadow-img; opacity: 0.65; roughness: 0.8; metalness: 0"
+      position="0 0.01 1.25"
+      rotation="-90 0 0"
+      scale="1 1 1"
+    >
+    </a-circle>
+    <a-camera position="0 9 11">
+      <a-cursor></a-cursor>
+    </a-camera>
+  </a-scene>
+</body>

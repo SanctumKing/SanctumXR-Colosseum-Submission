@@ -1,0 +1,88 @@
+body {
+  font-family: "Contrail One", monospace;
+  background: black;
+}
+
+.absolute-fill {
+  z-index: 10;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  pointer-events: none;
+}
+
+#recenterButton {
+  position: absolute;
+  z-index: 5;
+  left: 2vh;
+  bottom: 2vh;
+  max-width: 50px;
+  pointer-events: auto;
+}
+
+#promptText {
+  font-size: 8vw;
+  text-align: center;
+
+  color: white;
+  text-shadow: 2px 2px 8px purple;
+
+  position: absolute;
+  width: 100%;
+  bottom: 12vh;
+  left: 50%;
+  transform: translate(-50%, 0);
+}
+
+/* ANIMATIONS */
+
+.fly-in {
+  animation: fly-in 1.5s ease-out both;
+}
+@keyframes fly-in {
+  0% {
+    transform: translate(-100%, 0%);
+    opacity: 0;
+  }
+  70% {
+    opacity: 1;
+  }
+  100% {
+    transform: translate(-50%, 0%);
+    opacity: 1;
+  }
+}
+
+.fly-out {
+  animation: fly-out 1.5s ease-out both;
+}
+@keyframes fly-out {
+  0% {
+    transform: translate(-50%, 0%);
+    opacity: 1;
+  }
+  70% {
+    opacity: 0;
+  }
+  100% {
+    transform: translate(0%, 0%);
+    opacity: 0;
+  }
+}
+
+.pulse-once {
+  animation: pulse-once 0.2s cubic-bezier(0.785, 0.135, 0.15, 0.86) both;
+}
+@keyframes pulse-once {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(0.8);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
