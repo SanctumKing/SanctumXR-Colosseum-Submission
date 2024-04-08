@@ -1,6 +1,7 @@
 # sanctum
 Mixed Reality app powered by the Solana blockchain
 # SanctumXR
+![sanctumxr cover img](https://github.com/SanctumKing/SanctumXR-Colosseum-Submission/assets/129638774/c219b278-228d-4e38-a686-e20b08a88879)
 
 
 The purpose of this app is to provide an immersive augmented reality (AR) treasure hunting experience, allowing users to explore real-world environments, discover hidden treasures, and earn unique NFT rewards. This application was developed for the Solana Hackathon.
